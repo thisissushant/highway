@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User, validate } from "../models/user.model";
+import { User, validate } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 
 const router = Router();
@@ -26,4 +26,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export { router };

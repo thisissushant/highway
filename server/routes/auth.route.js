@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import Joi from "joi";
 
@@ -37,4 +37,4 @@ const validate = (data) => {
   return schema.validate(data);
 };
 
-module.exports = router;
+export { router };

@@ -25,19 +25,14 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.methods.generateRefreshToken = function () {
-  return jwt.sign(
-    {
-      _id: this._id,
-    },
-    process.env.REFRESH_TOKEN_SECRET,
-    {
-      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
-    }
-  );
+userSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
+    expiresIn: "7d",
+  });
+  return token;
 };
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model("user", userSchema);
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -48,4 +43,4 @@ const validate = (data) => {
   });
   return schema.validate(data);
 };
-module.exports = { User, validate };
+export { validate };
